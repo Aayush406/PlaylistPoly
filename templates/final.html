@@ -3,7 +3,7 @@
 <html lang="en" style="background-color: #212121">
     <script>
         window.onSpotifyWebPlaybackSDKReady = () => {
-          const token = ' DO SOMETHING HERE';
+          const token = '{{ token }}';
           const player = new Spotify.Player({
             name: 'PlaylistPoly Player',
             getOAuthToken: cb => { cb(token); }
@@ -30,6 +30,9 @@
     
           // Connect to the player
           player.connect();
+          player.togglePlay().then(() => {
+          console.log('Toggled playback!');
+          });
         };
       </script>
     <link rel="stylesheet" type="text/css" href="static/css/template.css">
@@ -42,9 +45,6 @@
     <body>
         <div style="text-align: center;">
             <h1>PlaylistPoly</h1>
-            <p><a href={{ spotify_login }}>
-                <button type="button" id="button">Log In With Spotify</button>
-            </a></p>
         </div>
     </body>
 </html>

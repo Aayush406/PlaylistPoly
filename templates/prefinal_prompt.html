@@ -15,9 +15,9 @@
             <p><a href="{{ url_for('home') }}">
                 <button style="font-size: 25px">Start Over</button>
             </a></p>
-            <p><a href=>
-                <button style="font-size: 25px">Confirm</button>
-            </a></p>
+            <form action="{{ url_for('final_page') }}" method="post">
+                <input type="submit" name="goto_end" style="font-size: 25px" value="Confirm"\>
+            </form>
         </div>
         <div style="display: flex">
         <div style="padding-right: 5%;">

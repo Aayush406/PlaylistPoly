@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
-from spotify import oauth, format_playlists, get_playlist_from_header, final_playlist_format
+from spotify import oauth, format_playlists, get_playlist_from_header, final_playlist_format, add_songs_to_queue, get_PlaylistPoly_device_id
 from spotipy import Spotify
+
+# 1416d4f6efe454c3a10311e784f0738ab0cee929
 
 app = Flask(__name__)
 
@@ -40,7 +42,11 @@ def spot_selections():
 
 @app.route("/end", methods=["POST"])
 def final_page():
-    pass
+    confirm = dict(request.form)
+    global spot, playlist_1, playlist_2, access_token
+    add_songs_to_queue(spot, playlist_1)
+    add_songs_to_queue(spot, playlist_2)
+    return render_template("final.html", token=access_token)
 
 
 if __name__ == '__main__':
