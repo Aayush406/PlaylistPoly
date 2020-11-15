@@ -32,7 +32,7 @@ def spot_selections():
 
     user_playlists = spot.current_user_playlists()["items"]
     selected_playlists = request.form
-
+    print(list(selected_playlists.values()))
     playlist_1, playlist_2 = [get_playlist_from_header(playlist, user_playlists) for playlist in selected_playlists.values()]
     play1_format, play2_format = final_playlist_format(playlist_1), final_playlist_format(playlist_2)
 
@@ -45,3 +45,5 @@ def final_page():
 
 if __name__ == '__main__':
     app.run(debug = True)
+#omment
+#comment
