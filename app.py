@@ -44,6 +44,7 @@ def spot_selections():
 def final_page():
     confirm = dict(request.form)
     global spot, playlist_1, playlist_2, access_token
+    print(spot.current_user())
     add_songs_to_queue(spot, playlist_1)
     add_songs_to_queue(spot, playlist_2)
     return render_template("final.html", token=access_token)

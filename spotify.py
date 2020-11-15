@@ -62,3 +62,5 @@ def add_songs_to_queue(spotify_obj, playlist):
         spotify_obj.add_to_queue(track_uri)
     return
 
+def is_premium(spotify_obj):
+    return spotify_obj
