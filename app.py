@@ -31,9 +31,8 @@ def spot_selections():
     global spot, playlist_1, playlist_2
 
     user_playlists = spot.current_user_playlists()["items"]
-    selected_playlists = request.form
-    print(list(selected_playlists.values()))
-    playlist_1, playlist_2 = [get_playlist_from_header(playlist, user_playlists) for playlist in selected_playlists.values()]
+    selected_playlists = request.form.getlist("playlists")
+    playlist_1, playlist_2 = [get_playlist_from_header(playlist, user_playlists) for playlist in selected_playlists]
     play1_format, play2_format = final_playlist_format(playlist_1), final_playlist_format(playlist_2)
 
     return render_template("prefinal_prompt.html", playlists=[play1_format, play2_format])
@@ -45,5 +44,5 @@ def final_page():
 
 if __name__ == '__main__':
     app.run(debug = True)
-#omment
+#comment
 #comment
