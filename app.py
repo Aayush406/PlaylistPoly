@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from spotify import oauth, format_playlists, get_playlist_from_header, final_playlist_format, add_songs_to_queue, get_PlaylistPoly_device_id
-from spotipy import Spotify
+from spotify import oauth, format_playlists, get_playlist_from_header, final_playlist_format, add_songs_to_queue, get_PlaylistPoly_device_id, is_premium
+from spotipy import Spotify, SpotifyException
 
 # 1416d4f6efe454c3a10311e784f0738ab0cee929
 
@@ -42,12 +42,18 @@ def spot_selections():
 
 @app.route("/end", methods=["POST"])
 def final_page():
-    confirm = dict(request.form)
     global spot, playlist_1, playlist_2, access_token
-    print(spot.current_user())
-    add_songs_to_queue(spot, playlist_1)
-    add_songs_to_queue(spot, playlist_2)
-    return render_template("final.html", token=access_token)
+    if is_premium(spot):
+        try:
+            add_songs_to_queue(spot, playlist_1)
+            add_songs_to_queue(spot, playlist_2)
+        except:
+            message = "No Active Device"
+        finally:
+            message = "Enjoy!"
+    else:
+        message = "Premium Required :-("
+    return render_template("final.html", token=access_token, message=message)
 
 
 if __name__ == '__main__':

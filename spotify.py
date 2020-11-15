@@ -56,11 +56,10 @@ def get_PlaylistPoly_device_id(spotify_obj):
 def add_songs_to_queue(spotify_obj, playlist):
     playlist_id = playlist["id"]
     p = spotify_obj.playlist_tracks(playlist_id)
-    print(p)
     for track in p["items"]:
         track_uri = f"spotify:track:{track['track']['href'][34:]}"
         spotify_obj.add_to_queue(track_uri)
     return
 
 def is_premium(spotify_obj):
-    return spotify_obj
+    return spotify_obj.me()["product"] == "premium"
