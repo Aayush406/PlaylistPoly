@@ -3,30 +3,42 @@ import os
 from dotenv import load_dotenv
 from spotipy import SpotifyOAuth
 load_dotenv()
+from collections import namedtuple
 
-scope = "playlist-read-private"
+Playlist = namedtuple("Playlist", ["title", "tracks"])
+
+scope = "playlist-read-private streaming user-read-email user-read-private"
 redirect_uri = "http://127.0.0.1:5000/spotify/callback"
 
-sp_main = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET"),
-                                                    redirect_uri=redirect_uri, scope=scope))
+oauth = SpotifyOAuth(client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET"),
+                                                    redirect_uri=redirect_uri, scope=scope, show_dialog=True,
+                                                    open_browser=False)
 
-user_playlists = sp_main.current_user_playlists()
+sp_auth_link = oauth.get_authorize_url()
 
-for i, playlist in enumerate(user_playlists["items"]):
-    print(i, playlist['name'])
+sp_main = spotipy.Spotify(auth_manager=oauth)
 
-while True:
-    try:
-        user_input = int(input("\nEnter the number of the playlist to view its songs: "))
-        if user_input not in range(len(user_playlists["items"])):
-            raise TypeError
-        break
-    except TypeError:
-        print(f"Must be a number in the range 0-{len(user_playlists['items'])}")
+def format_playlists(json_data: [dict]) -> [dict]:
+    formatted_playlists = []
+    for playlist_data in json_data:
+        key = playlist_data["name"]
+        value = playlist_data["owner"]["display_name"]
+        formatted_playlists.append(f"{key} by {value}")
+    return formatted_playlists
 
-selected_playlist = user_playlists["items"][user_input]["id"]
-user_playlist = sp_main.playlist_tracks(selected_playlist)
-print()
-for i, track in enumerate(user_playlist["items"]):
-    track = track["track"]
-    print(i, f"{track['name']} by {', '.join(artist['name'] for artist in track['artists'])}")
+
+def get_playlist_from_header(header: str, spot_playlist: [dict]) -> dict:
+    for playlist in spot_playlist:
+        if (header.startswith(playlist["name"])):
+            return playlist
+    return None
+
+
+def formatted_track(track: dict):
+    return f'"{track["name"]}" by {", ".join(artist["name"] for artist in track["artists"])}'
+
+
+def final_playlist_format(playlist_data: dict):
+    title = playlist_data["name"]
+    tracks = [formatted_track(track["track"]) for track in playlist_data["items"]]
+    return Playlist(title=title, tracks=tracks)

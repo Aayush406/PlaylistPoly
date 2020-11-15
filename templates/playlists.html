@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #212121">
+    <link rel="stylesheet" type="text/css" href="static/css/playlists.css">
+    <head>
+        <meta charset="UTF-8">
+        <title>Playlists Page</title>
+    </head>
+    <body id="text">
+        <div style="text-align: center;">
+            <h1 id="text">PlaylistPoly</h1>
+            <p id="text">Select Two Playlists</p>
+            <form action="{{ url_for('spot_selections') }}", method="post">
+                <label for="playlists" id="text">Choose Two Playlists:</label>
+                    <select id="playlists" name="playlists"> {% for playlist in playlists %}
+                        <option>{{ playlist }}</option>
+                    {% endfor %}</select>
+                    <select id="playlists" name="playlists"> {% for playlist in playlists %}
+                        <option>{{ playlist }}</option>
+                    {% endfor %}</select>
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+</html>

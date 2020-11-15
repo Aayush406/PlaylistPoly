@@ -1,0 +1,14 @@
+h1 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    size: 60px;
+}
+p {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    size: 30px;
+}
+
+form {
+    padding: 20px 10px; 
+}

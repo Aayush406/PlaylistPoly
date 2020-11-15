@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<html lang="en" style="background-color: #212121">
+    <script>
+        window.onSpotifyWebPlaybackSDKReady = () => {
+          const token = ' DO SOMETHING HERE';
+          const player = new Spotify.Player({
+            name: 'PlaylistPoly Player',
+            getOAuthToken: cb => { cb(token); }
+          });
+    
+          // Error handling
+          player.addListener('initialization_error', ({ message }) => { console.error(message); });
+          player.addListener('authentication_error', ({ message }) => { console.error(message); });
+          player.addListener('account_error', ({ message }) => { console.error(message); });
+          player.addListener('playback_error', ({ message }) => { console.error(message); });
+    
+          // Playback status updates
+          player.addListener('player_state_changed', state => { console.log(state); });
+    
+          // Ready
+          player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+          });
+    
+          // Not Ready
+          player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+          });
+    
+          // Connect to the player!
+          player.connect();
+        };
+      </script>
+    <link rel="stylesheet" type="text/css" href="static/css/template.css">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <h1>PlaylistPoly</h1>
+            <p><a href={{ spotify_login }}>
+                <button type="button" id="button">Log In With Spotify</button>
+            </a></p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" type="text/css" href="static/css/playlists.css">
+    <head>
+        <meta charset="UTF-8">
+        <title>Playlists Page</title>
+    </head>
+    <body id="text">
+        <div style="text-align: center;">
+            <h1 id="text">PlaylistPoly: Confirm Your Selections</h1>
+            {% for playlist in playlists %}
+            <p>
+                <h4> {{ playlist }} </h4> {% for track in playlist.tracks %}
+                <ol>
+                    {{ track }}
+                </ol>
+                {% endfor $}
+            </p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
