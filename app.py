@@ -36,7 +36,7 @@ def spot_selections():
     print(playlist_1)
     play1_format, play2_format = final_playlist_format(playlist_1, spot), final_playlist_format(playlist_2, spot)
 
-    return render_template("prefinal_prompt.html", playlists=[play1_format, play2_format])
+    return render_template("prefinal_prompt.html", pl=play1_format, p2=play2_format)
 
 @app.route("/end", methods=["POST"])
 def final_page():
