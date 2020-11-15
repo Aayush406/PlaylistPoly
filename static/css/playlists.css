@@ -12,3 +12,61 @@ p {
 form {
     padding: 20px 10px; 
 }
+
+#playlists {
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#text {
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.right_p {
+    float: right;
+}
+
+#button_green {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #08750c;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 20px;
+    transition-duration: 1s;
+}
+  
+#button_green {
+    transition-duration: 0.4s;
+}
+#button_green:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#button_red {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #750303;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 20px;
+    transition-duration: 1s;
+}
+  
+#button_red {
+    transition-duration: 0.4s;
+}
+#button_red {
+    background-color: #f10000;
+    color: white;
+}
