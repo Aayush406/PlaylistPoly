@@ -8,7 +8,8 @@ from collections import namedtuple
 Playlist = namedtuple("Playlist", ["title", "tracks"])
 
 scope = "playlist-read-private streaming user-read-email user-read-private"
-redirect_uri = "http://127.0.0.1:5000/spotify/callback"
+redirect_uri = os.getenv("REDIRECT_URI")
+# http://127.0.0.1:5000/spotify/callback 
 
 oauth = SpotifyOAuth(client_id=os.getenv("CLIENT_ID"), client_secret=os.getenv("CLIENT_SECRET"),
                                                     redirect_uri=redirect_uri, scope=scope, show_dialog=True,
