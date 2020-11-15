@@ -19,7 +19,7 @@ def sp_page():
     auth_code = request.args.get("code")
     if auth_code != None:
         global spot, access_token
-        access_token = oauth.get_access_token(code=auth_code, as_dict=False)
+        access_token = oauth.get_access_token(code=auth_code, as_dict=False, check_cache=False)
         spot = Spotify(auth=access_token)
         user_playlists = format_playlists(spot.current_user_playlists()["items"])
         return render_template("playlists.html", playlists=user_playlists)
