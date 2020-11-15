@@ -8,12 +8,18 @@
     <body id="text">
         <div style="text-align: center;">
             <h1 id="text">PlaylistPoly: Confirm Your Selections</h1>
-            <p> {% for playlist in playlists %}
-                <h4> {{ playlist }} </h4> 
-                <ol>{% for track in playlist.tracks %}
+            <p>
+                <h4> {{ p1.title }} </h4> 
+                <ol>{% for track in p1.tracks %}
                     {{ track }}
                 </ol> {% endfor $}
-            {% endfor %}</p>
+            </p>
+            <p>
+                <h4> {{ p2.title }} </h4> 
+                <ol>{% for track in p2.tracks %}
+                    {{ track }}
+                </ol> {% endfor $}
+            </p>
         </div>
     </body>
 </html>
