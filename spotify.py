@@ -38,7 +38,9 @@ def formatted_track(track: dict):
     return f'"{track["name"]}" by {", ".join(artist["name"] for artist in track["artists"])}'
 
 
-def final_playlist_format(playlist_data: dict):
+def final_playlist_format(playlist_data: dict, spotify_obj):
     title = playlist_data["name"]
-    tracks = [formatted_track(track["track"]) for track in playlist_data["items"]]
+    playlist_id = playlist_data["id"]
+    playlist = spotify_obj.playlist_tracks(playlist_id)
+    tracks = [formatted_track(track["track"]) for track in playlist["items"]]
     return Playlist(title=title, tracks=tracks)
