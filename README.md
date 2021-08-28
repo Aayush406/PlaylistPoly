@@ -8,4 +8,4 @@ The function of this web app is to combine two of your favorite playlists into o
 
 ### Devpost
 
-Visit this link to view the devpost to gain more details on this project: https://devpost.com/software/playlistpoly
+Visit this link to view the devpost to gain more details about this project: https://devpost.com/software/playlistpoly
